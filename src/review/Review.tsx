@@ -66,8 +66,7 @@ function Review() {
       {/* TODO show previous data */}
       {/* {data && JSON.stringify(note)} */}
       {/* </div> */}
-      <div >
- 
+      <div>
         <div className="bar">
           <ReviewActionBar
             field={noteField}
@@ -105,7 +104,8 @@ function Review() {
         </div>
         <div className="iframeContainer">
           <iframe
-          sandbox="true"            width="99%"
+            sandbox="true"
+            width="99%"
             height="100%"
             title="noticia"
             src={note.urls[urlIndex]}

@@ -3,13 +3,11 @@ import { useState } from "react";
 import type { NoteInfo, NoteInfoFieldsType } from "../firebase/types";
 import { dbUpdateNoteField } from "../firebase/firebase";
 
-
-
 const SEX_OPTIONS = ["hombre", "mujer"] as const;
 
 const AGE_OPTIONS = ["niño", "joven", "adulto", "viejo"] as const;
 
-const TRANSPORT_OPTIONS = ['motocicleta', 'peaton','coche', 'bicicleta']
+const TRANSPORT_OPTIONS = ["motocicleta", "peaton", "coche", "bicicleta"];
 
 type OmitButtonProps = {
   onOmit: () => void;
@@ -59,7 +57,10 @@ const Age = ({ noteId, onFilled, onOmit }: AgeProps) => {
         <div>Categoría</div>
       </div>
       {AGE_OPTIONS.map((ageOptions) => (
-        <button onClick={() => handleAgeCategoryUpdate(ageOptions)} key={ageOptions}>
+        <button
+          onClick={() => handleAgeCategoryUpdate(ageOptions)}
+          key={ageOptions}
+        >
           {ageOptions}
         </button>
       ))}
@@ -112,54 +113,54 @@ type DateProps = {
   onOmit: () => void;
 };
 
-const MONTHS:Record<number, {month:string;days:number}> = {
-  1:{
-    month:"Enero",
-    days: 31
+const MONTHS: Record<number, { month: string; days: number }> = {
+  1: {
+    month: "Enero",
+    days: 31,
   },
   2: {
-    month:"Febrero",
-    days: 29
+    month: "Febrero",
+    days: 29,
   },
   3: {
-    month:"Marzo",
-    days: 31
+    month: "Marzo",
+    days: 31,
   },
   4: {
-    month:"Abril",
-    days: 30
+    month: "Abril",
+    days: 30,
   },
   5: {
-    month:"Mayo",
-    days: 31
+    month: "Mayo",
+    days: 31,
   },
   6: {
-    month:"Junio",
-    days: 30
+    month: "Junio",
+    days: 30,
   },
   7: {
-    month:"Julio",
-    days: 31
+    month: "Julio",
+    days: 31,
   },
   8: {
-    month:"Agosto",
-    days: 31
+    month: "Agosto",
+    days: 31,
   },
   9: {
-    month:"Septiembre",
-    days: 30
+    month: "Septiembre",
+    days: 30,
   },
   10: {
-    month:"Octubre",
-    days: 31
+    month: "Octubre",
+    days: 31,
   },
   11: {
-    month:"Noviembre",
-    days: 30
+    month: "Noviembre",
+    days: 30,
   },
   12: {
-    month:"Diciembre",
-    days: 31
+    month: "Diciembre",
+    days: 31,
   },
 };
 
@@ -202,7 +203,7 @@ const Date = ({ noteId, onFilled, onOmit }: DateProps) => {
         <span>
           <label htmlFor="month">Mes:</label>
           <select id="month" value={month} onChange={handleMonthChange}>
-            {Object.entries(MONTHS).map(([index,monthItem]) => (
+            {Object.entries(MONTHS).map(([index, monthItem]) => (
               <option value={index}>{monthItem.month}</option>
             ))}
           </select>
@@ -214,14 +215,14 @@ const Date = ({ noteId, onFilled, onOmit }: DateProps) => {
             value={year}
             onChange={(event) => setYear(parseInt(event.target.value))}
           >
-            {[2018,2019, 2020, 2021, 2022, 2023].map((yearItem) => (
+            {[2018, 2019, 2020, 2021, 2022, 2023].map((yearItem) => (
               <option key={yearItem} value={yearItem}>
                 {yearItem}
               </option>
             ))}
           </select>
         </span>
-        <button type="submit" disabled={!day || month< 0 || !year}>
+        <button type="submit" disabled={!day || month < 0 || !year}>
           Guardar
         </button>
       </form>
@@ -246,16 +247,22 @@ const Coordinates = ({ noteId, onFilled, onOmit }: NameProps) => {
       .split("/")
       .find((ii) => ii.startsWith("data"));
 
-    const latitudeUrlString = dataUrl?.split('!').find(dataItem => dataItem.startsWith('3d'))?.replace('3d','')
-    const longitudeUrlString = dataUrl?.split('!').find(dataItem => dataItem.startsWith('4d'))?.replace('4d','')
+    const latitudeUrlString = dataUrl
+      ?.split("!")
+      .find((dataItem) => dataItem.startsWith("3d"))
+      ?.replace("3d", "");
+    const longitudeUrlString = dataUrl
+      ?.split("!")
+      .find((dataItem) => dataItem.startsWith("4d"))
+      ?.replace("4d", "");
 
-    if (!latitudeUrlString || !longitudeUrlString ) {
+    if (!latitudeUrlString || !longitudeUrlString) {
       setCoordinates({ latitude: 0, longitude: 0 });
       return;
     }
 
-    const latitude = parseFloat(latitudeUrlString)
-    const longitude = parseFloat(longitudeUrlString)
+    const latitude = parseFloat(latitudeUrlString);
+    const longitude = parseFloat(longitudeUrlString);
 
     if (!isNaN(latitude) && !isNaN(latitude)) {
       setCoordinates({ latitude, longitude });
@@ -263,7 +270,6 @@ const Coordinates = ({ noteId, onFilled, onOmit }: NameProps) => {
     }
 
     setCoordinates({ latitude: 0, longitude: 0 });
-
   };
 
   const handleCoordinatesChange = (
@@ -302,15 +308,15 @@ const Coordinates = ({ noteId, onFilled, onOmit }: NameProps) => {
         />
 
         <div>
-            {!!coordinates.latitude && !!coordinates.longitude &&
-          <a
-          href={`https://www.google.com/maps/?q=${coordinates.latitude},${coordinates.longitude}`}
-          target="_blank"
-          rel="noreferrer"
-          >
-            google maps
-          </a>
-        }
+          {!!coordinates.latitude && !!coordinates.longitude && (
+            <a
+              href={`https://www.google.com/maps/?q=${coordinates.latitude},${coordinates.longitude}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              google maps
+            </a>
+          )}
         </div>
         <label htmlFor="latitude">Latitud</label>
         <input
@@ -340,23 +346,22 @@ const Coordinates = ({ noteId, onFilled, onOmit }: NameProps) => {
 };
 
 type ReviewActionBarProps = {
-    field: NoteInfoFieldsType;
-    noteId: string;
-    nextNote: () => void;
-    
-  };
+  field: NoteInfoFieldsType;
+  noteId: string;
+  nextNote: () => void;
+};
 
-const ReviewActionBar = ({
-  field,
-  noteId,
-  nextNote,
-}: ReviewActionBarProps) => {
+const ReviewActionBar = ({ field, noteId, nextNote }: ReviewActionBarProps) => {
   const handleSexUpdate = (newSexValue: NoteInfo["sex"]) => {
     dbUpdateNoteField(noteId, "sex", newSexValue).then(nextNote);
   };
 
-  const handleVictimTransportUpdate = (newVictimTransport: NoteInfo['victimTransport']) => {
-    dbUpdateNoteField(noteId, 'victimTransport', newVictimTransport).then(nextNote);
+  const handleVictimTransportUpdate = (
+    newVictimTransport: NoteInfo["victimTransport"]
+  ) => {
+    dbUpdateNoteField(noteId, "victimTransport", newVictimTransport).then(
+      nextNote
+    );
   };
 
   switch (field) {
@@ -377,21 +382,21 @@ const ReviewActionBar = ({
       return <Name noteId={noteId} onFilled={nextNote} onOmit={nextNote} />;
     case "date":
       return <Date noteId={noteId} onFilled={nextNote} onOmit={nextNote} />;
-    case 'coordinates':
+    case "coordinates":
       return (
         <Coordinates noteId={noteId} onFilled={nextNote} onOmit={nextNote} />
       );
-      case 'victimTransport':
-        return (
-          <>
-            {TRANSPORT_OPTIONS.map((transportItem) => (
-              <button onClick={() => handleVictimTransportUpdate(transportItem)}>
-                {transportItem}
-              </button>
-            ))}
-            <OmitButton onOmit={nextNote} />
-          </>
-        );
+    case "victimTransport":
+      return (
+        <>
+          {TRANSPORT_OPTIONS.map((transportItem) => (
+            <button onClick={() => handleVictimTransportUpdate(transportItem)}>
+              {transportItem}
+            </button>
+          ))}
+          <OmitButton onOmit={nextNote} />
+        </>
+      );
     default:
       return <div>hola</div>;
   }

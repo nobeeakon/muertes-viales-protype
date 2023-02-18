@@ -1,18 +1,15 @@
-import React from 'react';
-import './App.css';
-import AddNotes from './add-notes/AddNotes';
-import ParseAndAddNotes from './add-notes/ParseAndAddNotes';
-import Review from './review/Review';
+import React from "react";
+import "./App.css";
+import AddNotes from "./add-notes/AddNotes";
+import ParseAndAddNotes from "./add-notes/ParseAndAddNotes";
+import Review from "./review/Review";
 
 function App() {
-
-
-
   return (
-    <div > 
+    <div>
       <AddNotes />
-    <ParseAndAddNotes />
-<Review/>
+      <ParseAndAddNotes />
+      <Review />
     </div>
   );
 }

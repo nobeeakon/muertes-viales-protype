@@ -1,22 +1,20 @@
 .iframeContainer {
-    height: 95vh ;
-    display: flex;
-    justify-content:center;
-    background-color:white;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  background-color: white;
 }
 
-
 .bar {
-    background: white;
-    position: sticky;
-    top:0;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    margin-bottom: 8px;
-    padding: 4px;
+  background: white;
+  position: sticky;
+  top: 0;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-bottom: 8px;
+  padding: 4px;
 }
 
 .iframe {
-    margin-left:auto;
-    margin-right:auto;
-
+  margin-left: auto;
+  margin-right: auto;
 }
